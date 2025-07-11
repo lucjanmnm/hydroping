@@ -23,27 +23,40 @@ class HydroPingApp extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'HydroPing',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true,
             brightness: Brightness.light,
-            scaffoldBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.light(
+              primary: Colors.blue[400]!,
+              secondary: Colors.blueAccent,
+              background: Colors.grey[100]!,
+              surface: Colors.white,
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+            scaffoldBackgroundColor: Colors.grey[100],
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.transparent,
               elevation: 0,
               centerTitle: true,
               foregroundColor: Colors.black,
             ),
-            textTheme: const TextTheme(
-              headlineSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              displayLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 60, color: Colors.blue),
-            ),
+            cardColor: Colors.white,
           ),
+
           darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.dark),
             useMaterial3: true,
             brightness: Brightness.dark,
+            colorScheme: ColorScheme.dark(
+              primary: Colors.blue[300]!,
+              secondary: Colors.blue[700]!,
+              background: const Color(0xFF181925),
+              surface: const Color(0xFF23273A),
+              onPrimary: Colors.white,
+              onSurface: Colors.white,
+            ),
             scaffoldBackgroundColor: const Color(0xFF181925),
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.transparent,
@@ -51,10 +64,7 @@ class HydroPingApp extends StatelessWidget {
               centerTitle: true,
               foregroundColor: Colors.white,
             ),
-            textTheme: const TextTheme(
-              headlineSmall: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-              displayLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 60, color: Colors.blue),
-            ),
+            cardColor: const Color(0xFF23273A),
           ),
           themeMode: themeProvider.themeMode,
           home: const HomeScreen(),

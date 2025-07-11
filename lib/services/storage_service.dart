@@ -4,6 +4,8 @@ class StorageService {
   static const String glassesTodayKey = 'glasses_today';
   static const String dailyGoalKey = 'daily_goal';
   static const String reminderIntervalKey = 'reminder_interval';
+  static const String notificationsEnabledKey = 'notifications_enabled';
+  static const String historyKey = 'history';
 
   Future<int> loadGlassesToday() async {
     final prefs = await SharedPreferences.getInstance();
@@ -33,5 +35,27 @@ class StorageService {
   Future<void> saveReminderInterval(int hours) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt(reminderIntervalKey, hours);
+  }
+
+  Future<bool> loadNotificationsEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(notificationsEnabledKey) ?? true;
+  }
+
+  Future<void> saveNotificationsEnabled(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(notificationsEnabledKey, enabled);
+  }
+
+  Future<List<int>> loadHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    final list = prefs.getStringList(historyKey);
+    if (list == null) return List.filled(7, 0);
+    return list.map((e) => int.tryParse(e) ?? 0).toList();
+  }
+
+  Future<void> saveHistory(List<int> history) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList(historyKey, history.map((e) => e.toString()).toList());
   }
 }

@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -21,7 +20,6 @@ android {
     }
 
     defaultConfig {
-        // Specify your unique Application ID
         applicationId = "com.example.hydroping"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
@@ -31,7 +29,6 @@ android {
 
     buildTypes {
         release {
-            // For now, use the debug signing config so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -42,6 +39,5 @@ flutter {
 }
 
 dependencies {
-    // Required for Java 8+ APIs on older Android
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 }
